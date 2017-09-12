@@ -37,10 +37,9 @@
             $.ajax({
                 type: 'POST',
                 url: Config.API_ENDPOINT + '/token',
-                data: JSON.stringify({
-                    userId : userId,
-                    password : password
-                })
+                headers : { 'Authorization' : userId + ':' + password },
+                data: JSON.stringify({})
+
             }).done(function(res) {
                 console.log(res);
                 sessionStorage.setItem('token', res.token);
