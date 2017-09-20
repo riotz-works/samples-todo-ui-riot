@@ -70,8 +70,13 @@
                 url: Config.API_ENDPOINT + '/todos',
                 headers : { 'Authorization' : token } ,
             }).done(function(res) {
+                console.log('res', res);
                 _this.loading = false;
-                _this.items = res.items;
+                if (!res.items) {
+                    _this.items = [];
+                } else {
+                    _this.items = res.items;
+                }
                 _this.update();
 
             }).fail(function(err) {
@@ -86,7 +91,10 @@
             $.ajax({
                 type: 'POST',
                 url: Config.API_ENDPOINT + '/todos',
-                headers : { 'Authorization' : token },
+                headers : { 
+                    'Authorization' : token,
+                    'Content-Type' : 'application/json'
+                },
                 data: JSON.stringify(data)
             }).done(function(res) {
                 _this.loading = false;

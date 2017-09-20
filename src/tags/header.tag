@@ -3,7 +3,7 @@
         <a href="#" class="header item">
             <h4>
                 <i class="checkmark box icon"></i>
-                Sample To-Do App
+                Sample To-Do App [ 0.0.1 ]
             </h4>
         </a>
         <div class="right menu">
