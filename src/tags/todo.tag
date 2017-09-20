@@ -24,28 +24,28 @@
     </div>
 
     <script>
-        var that = this;
-        that.items = [];
+        var _this = this;
+        _this.items = [];
         loadItems();
 
         edit(e) {
-            this.text = e.target.value
+            _this.text = e.target.value
         }
 
         add(e) {
-            if (this.text) {
-                this.items.push({ title: this.text, done: false });
-                this.text = this.refs.input.value = '';
+            if (_this.text) {
+                _this.items.push({ title: _this.text, done: false });
+                _this.text = this.refs.input.value = '';
             }
             e.preventDefault();
-            updateItems({ items: that.items });
+            updateItems({ items: _this.items });
         }
 
         removeAllDone(e) {
-            this.items = this.items.filter(function(item) {
+            _this.items = _this.items.filter(function(item) {
                 return !item.done;
             });
-            updateItems({ items: that.items });
+            updateItems({ items: _this.items });
         }
 
         whatShow(item) {
@@ -59,29 +59,29 @@
         toggle(e) {
             var item = e.item;
             item.done = !item.done;
-            updateItems({ items: that.items });
+            updateItems({ items: _this.items });
         }
 
         function loadItems() {
-            that.loading = true;
+            _this.loading = true;
             var token = sessionStorage.getItem('token');
             $.ajax({
                 type: 'GET',
                 url: Config.API_ENDPOINT + '/todos',
                 headers : { 'Authorization' : token } ,
             }).done(function(res) {
-                that.loading = false;
-                that.items = res.items;
-                that.update();
+                _this.loading = false;
+                _this.items = res.items;
+                _this.update();
 
             }).fail(function(err) {
-                that.loading = false;
+                _this.loading = false;
                 console.log(err);
             });
         }
 
         function updateItems(data) {
-            that.loading = true;
+            _this.loading = true;
             var token = sessionStorage.getItem('token');
             $.ajax({
                 type: 'POST',
@@ -89,8 +89,8 @@
                 headers : { 'Authorization' : token },
                 data: JSON.stringify(data)
             }).done(function(res) {
-                that.loading = false;
-                that.update();
+                _this.loading = false;
+                _this.update();
 
             }).fail(function(err) {
                 console.log(err);
