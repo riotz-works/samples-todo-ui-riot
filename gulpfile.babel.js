@@ -8,7 +8,7 @@ import s3 from 'gulp-s3';
 // Environment variables
 const CORE_API_ENDPOINT       = process.env.API_ENDPOINT;
 const AWS_ACCESS_KEY_ID       = process.env.AWS_ACCESS_KEY_ID;
-const AWS_SECRET_ACCESS_KEY   = process.env.AWS_ACCESS_KEY_ID;
+const AWS_SECRET_ACCESS_KEY   = process.env.AWS_SECRET_ACCESS_KEY;
 const DEPLOY_BUCKET_NAME      = process.env.DEPLOY_BUCKET_NAME;
 const DEPLOY_BUCKET_REGION    = process.env.DEPLOY_BUCKET_REGION;
 

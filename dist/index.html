@@ -5,21 +5,43 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <title>Riotz Books</title>
+        <title>Sample To-Do App</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="css/todo.css">
     </head>
     <body>
-        <main></main>
+        <header></header>
+        <content></content>
+        <footer></footer>
+
+        <script src="tags/header.tag" type="riot/tag"></script>
+        <script src="tags/auth.tag" type="riot/tag"></script>
+        <script src="tags/home.tag" type="riot/tag"></script>
+        <script src="tags/todo.tag" type="riot/tag"></script>
+        <script src="tags/footer.tag" type="riot/tag"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/riot@3.7/riot+compiler.min.js"></script>
         <script src="https://cdn.jsdelivr.net/riot-route/3.1.1/route.min.js"></script>
         <script src="js/config.js"></script>
-        <script src="js/bundle.js"></script>
+
         <script>
-            riot.mount('main');
+            riot.mount('header');
+            riot.mount('footer');
+            route('/', function() {
+                riot.mount('content', 'home');
+            });
+            route('/signin', function() {
+                riot.mount('content', 'auth');
+            });
+            route('/todo', function() {
+                riot.mount('content', 'todo', {
+                    title: 'To-Do List!',
+                    items: []
+                });
+            });
+            route.start(true);
         </script>
     </body>
 </html>
