@@ -24,81 +24,73 @@
     </div>
 
     <script>
-        var _this = this;
-        _this.items = [];
+        var that = this;
+        that.items = [];
         loadItems();
 
-        edit(e) {
-            _this.text = e.target.value
+        const edit = (e) => {
+            this.text = e.target.value
         }
 
-        add(e) {
-            if (_this.text) {
-                _this.items.push({ title: _this.text, done: false });
-                _this.text = this.refs.input.value = '';
+        const add = (e) => {
+            if (this.text) {
+                this.items.push({ title: this.text, done: false });
+                this.text = this.refs.input.value = '';
             }
             e.preventDefault();
-            updateItems({ items: _this.items });
+            updateItems({ items: that.items });
         }
 
-        removeAllDone(e) {
-            _this.items = _this.items.filter(function(item) {
+        const removeAllDone = (e) => {
+            this.items = this.items.filter(function(item) {
                 return !item.done;
             });
-            updateItems({ items: _this.items });
+            updateItems({ items: that.items });
         }
 
-        whatShow(item) {
+        const whatShow = (item) => {
             return !item.hidden;
         }
 
-        onlyDone(item) {
+        const onlyDone = (item) => {
             return item.done;
         }
 
-        toggle(e) {
+        const toggle = (e) => {
             var item = e.item;
             item.done = !item.done;
-            updateItems({ items: _this.items });
+            updateItems({ items: that.items });
         }
 
-        function loadItems() {
-            _this.loading = true;
+        const loadItems = () => {
+            that.loading = true;
             var token = sessionStorage.getItem('token');
             $.ajax({
                 type: 'GET',
                 url: Config.API_ENDPOINT + '/todos',
                 headers : { 'Authorization' : token } ,
             }).done(function(res) {
-                console.log('res', res);
-                _this.loading = false;
-                if (!res.items) {
-                    _this.items = [];
-                } else {
-                    _this.items = res.items;
-                }
-                _this.update();
+                that.loading = false;
+                that.items = res.items;
+                that.update();
 
             }).fail(function(err) {
-                _this.loading = false;
+                that.loading = false;
                 console.log(err);
             });
         }
 
-        function updateItems(data) {
-            _this.loading = true;
+        const updateItems = (data) => {
+            that.loading = true;
             var token = sessionStorage.getItem('token');
             $.ajax({
                 type: 'POST',
                 url: Config.API_ENDPOINT + '/todos',
-                headers : { 
-                    'Authorization' : token,
-                    'Content-Type' : 'application/json'
-                },
+                headers : { 'Authorization' : token },
                 data: JSON.stringify(data)
             }).done(function(res) {
-                _this.loading = false;
-                _this.update();
+                that.loading = false;
+                that.update();
 
             }).fail(function(err) {
                 console.log(err);

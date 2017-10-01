@@ -37,7 +37,7 @@
                 });
             }
 
-        signout() {
+        const signout = () => {
             sessionStorage.removeItem('token');
             riot.mount('header');
             location.href = '';

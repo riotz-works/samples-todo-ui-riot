@@ -29,7 +29,7 @@
     <script>
         var that = this;
 
-        signin() {
+        const signin = () => {
             var userId = this.refs.userId.value;
             var password = this.refs.password.value;
             that.loading = true;
